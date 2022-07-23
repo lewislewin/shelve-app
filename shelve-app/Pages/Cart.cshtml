@@ -1,0 +1,15 @@
+﻿@page
+@model shelve_app.Pages.CartModel
+@using shelve_app.Models
+@using Newtonsoft.Json.Linq;
+@{
+    ViewData["Title"] = "Cart";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+@foreach (dynamic item in JObject.Parse(HttpContext.Request.Cookies["Cart"]))
+{
+    
+}
+

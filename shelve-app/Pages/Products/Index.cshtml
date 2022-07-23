@@ -1,0 +1,21 @@
+﻿@page
+@model shelve_app.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Book Shelf";
+}
+
+<h1 class="text-center">Book Shelf</h1>
+<div>
+    @foreach (var item in Model.Product) {
+
+
+                        <div class="row">
+                            <a asp-page="./Details" asp-route-id="@item.Id"><img src=@Html.DisplayFor(modelItem => item.MainImage)></a>
+                            <a asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a>
+                            <a asp-page="./Details" asp-route-id="@item.Id">£@Html.DisplayFor(modelItem => item.Price)</a>
+                        </div>
+
+
+}
+</div>

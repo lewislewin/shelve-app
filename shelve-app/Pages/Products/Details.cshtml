@@ -1,0 +1,52 @@
+﻿@page
+@model shelve_app.Pages.Products.DetailsModel
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class='text-center'>@Html.DisplayFor(model => model.Product.Title)</h1>
+
+<div>
+    <hr />
+    <dl class="row text-center">
+        <dd class="col-sm-3">
+            <img src=@Html.DisplayFor(model => model.Product.MainImage) />
+        </dd>
+        <dd class="col-sm-7">
+            @Html.DisplayFor(model => model.Product.Description)
+        </dd>
+        <dd class="col-sm-100">
+            <h4>@Html.DisplayFor(model => model.Product.Author)</h4>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.ReleaseDate)
+        </dt>
+        <dd class="col-sm-100">
+            @Html.DisplayFor(model => model.Product.ReleaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Genre)
+        </dt>
+        <dd class="col-sm-100">
+            @Html.DisplayFor(model => model.Product.Genre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </dt>
+        <dd class="col-sm-100">
+            £@Html.DisplayFor(model => model.Product.Price)
+        </dd>
+        <form method="post">
+                                <input type="hidden" name="id" value="@Html.DisplayFor(model => model.Product.Id)" />
+                                <input type="submit" value="Add to cart" class="btn btn-primary" asp-page-handler="Cart" />
+
+            </form>
+    </dl>
+            
+            
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
