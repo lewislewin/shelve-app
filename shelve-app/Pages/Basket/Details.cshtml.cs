@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using shelve_app.Data;
 using shelve_app.Models;
-using Newtonsoft.Json.Linq;
 
-namespace shelve_app.Pages.Products
+namespace shelve_app.Pages.Basket
 {
     public class DetailsModel : PageModel
     {
@@ -39,32 +38,6 @@ namespace shelve_app.Pages.Products
                 Product = product;
             }
             return Page();
-        }
-
-        public RedirectToPageResult OnPostCart(int? id)
-        {
-            
-            dynamic cart = HttpContext.Request.Cookies["Cart"];
-            if (cart == null) {
-                
-
-
-                Response.Cookies.Append("Cart", "{\"" + id.ToString() + "\"" + ":" + "1}");
-                return RedirectToPage("../Basket/Index");
-            }
-            cart = JObject.Parse(cart);
-            
-            if (cart.ContainsKey(id.ToString()))
-            {
-                dynamic temp = cart[id.ToString()].Value + 1;
-                cart[id.ToString()] = temp;
-                Response.Cookies.Append("Cart", cart.ToString());
-                return RedirectToPage("../Basket/Index");
-            }
-
-            cart.Add(new JProperty(id.ToString(), 1));
-            Response.Cookies.Append("Cart", cart.ToString());
-            return RedirectToPage("../Basket/Index");
         }
     }
 }
