@@ -10,6 +10,23 @@
     {
         return x * y;
     }
+    public float GetTotal()
+    {
+        float total = 0;
+        foreach (var item in JObject.Parse(HttpContext.Request.Cookies["Cart"]))
+        {
+            total = total + float.Parse(item.Value.ToString()) * float.Parse(Model.Product[int.Parse(item.Key) - 1].Price.ToString());
+        }
+        return total;
+    }
+    public void RemoveOne(int id)
+    {
+        JObject cart = JObject.Parse(HttpContext.Request.Cookies["Cart"]);
+    }
+    public void AddOne(int id)
+    {
+        
+    }
 }
 
 <h1>Basket</h1>
@@ -56,3 +73,10 @@
 }
     </tbody>
 </table>
+<div class="col">
+    <div class="row">
+        Total: £@GetTotal()
+        <a href="../Products/Index">Buy more Books!</a>
+        <a href="CHECKOUT">Checkout!</a>
+    </div>
+</div>
